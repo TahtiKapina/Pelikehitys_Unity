@@ -3,27 +3,35 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public CharacterController characterController;
-    public float moveSpeed = 5f;
-    public float gravity = -9.81f;
+    [SerializeField] private float moveSpeed = 5f;
 
-    void Update()
+    private CharacterController characterController;
+    private float verticalVelocity;
+    private float gravity = -9.81f;
+    private void Update()
     {
         Vector2 moveInput = ReadMovementInput();
 
         HandleAttack();
+
+        HandleJump();
 
         Move(moveInput);
     }
 
     private void Move(Vector2 moveInput)
     {
-        // Laske pelaajan suunan
+        if (characterController.isGrounded && verticalVelocity < 0f)
+        {
+            verticalVelocity = -2f;
+        }
+
+        verticalVelocity += gravity * Time.deltaTime;
+
+        // Laske pelaajan liikumista
         Vector3 direction = transform.right * moveInput.x + transform.forward * moveInput.y;
 
-        Vector3 velocity = direction * moveSpeed;
-
-
+        Vector3 velocity = direction * moveSpeed + Vector3.up * verticalVelocity;
 
         characterController.Move(velocity * Time.deltaTime);
     }
@@ -50,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
             if (Keyboard.current.wKey.isPressed) y -= 1f;
             if (Keyboard.current.sKey.isPressed) y += 1f;
 
-            moveInput = new Vector2(x, y).normalized;    
+            if(x != 0f || y != 0f) moveInput = new Vector2(x, y).normalized;    
         }
 
         // Palauta liikesyöte kutsujalle
@@ -65,6 +73,15 @@ public class PlayerMovement : MonoBehaviour
         if (Gamepad.current.rightTrigger.wasPressedThisFrame)
         {
             Debug.Log("Hyökkäys aktivoitu");
+        }
+    }
+    void HandleJump()
+    {
+        if (Gamepad.current == null) return;
+
+        if (Gamepad.current.buttonSouth.wasPressedThisFrame && characterController.isGrounded)
+        {
+            verticalVelocity = 5f;
         }
     }
 }
