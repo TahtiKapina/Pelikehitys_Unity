@@ -1,6 +1,6 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -9,6 +9,10 @@ public class SettingsManager : MonoBehaviour
 
     // Referenssi Slider-komponenttiin ‰‰nenvoimakkuuden s‰‰t‰miseksi
     [SerializeField] Slider volumeSlider;
+
+    [SerializeField] Slider sensitivitySlider;
+
+    [SerializeField] TMP_Dropdown graphicsInput;
 
     private void Start()
     {
@@ -29,6 +33,20 @@ public class SettingsManager : MonoBehaviour
         // Tallentaa ‰‰nenvoimakkuuden asetuksen PlayerPrefsiin
         PlayerPrefs.SetFloat("Volume", volumeSlider.value);
 
+        PlayerPrefs.SetFloat("Sensitivity", sensitivitySlider.value);
+
+        PlayerPrefs.SetInt("Graphics", graphicsInput.value);
+
         PlayerPrefs.Save();
+    }
+
+    public void ResetSettings()
+    {
+        PlayerPrefs.DeleteAll();
+
+        jumpKeyInput.value = 0;
+        volumeSlider.value = 0.5f;
+        graphicsInput.value = 0;
+        sensitivitySlider.value = 0.5f;
     }
 }
