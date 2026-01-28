@@ -11,6 +11,8 @@ public class Health : MonoBehaviour
     // tämänhetkinen elämä
     private int currentHealth;
 
+    public int CurrentHealth { get => currentHealth; }
+
     void Awake()
     {
         currentHealth = maxHealth;

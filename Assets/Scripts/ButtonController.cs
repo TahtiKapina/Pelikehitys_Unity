@@ -8,8 +8,26 @@ public class ButtonController : MonoBehaviour
     // Referenssi avattavaan arkkuun
     [SerializeField] private ChestController chest;
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            OpenChest();
+        }
+    }
+
     // TEHTÄVÄ:
     // 1. Tee metodi, jota voidaan kutsua E-painikkeet painalluksesta
-    // 2. Metodin tulee pyytää arkkua avautumaan
 
+    public void OpenChest()
+    {
+        if (chest != null)
+        {
+            chest.OpenChest();
+        }
+        else
+        {
+            Debug.LogWarning("Chest reference is missing!");
+        }
+    }
 }

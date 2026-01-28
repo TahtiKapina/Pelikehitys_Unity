@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.IO;
 
 /// <summary>
 /// Player vastaa pelaajan toiminnasta (liikkuminen, hyökkäys).
@@ -30,6 +31,11 @@ public class Player : MonoBehaviour
         {
             TakeDamage(-1);
         }
+
+        if (Keyboard.current.yKey.wasPressedThisFrame) 
+        {
+            Save();
+        }
     }
 
     public void TakeDamage(int amount)
@@ -41,6 +47,21 @@ public class Player : MonoBehaviour
     public void Heal(int amount)
     {
         health.Modify(amount);
+    }
+
+    // Tallennetaan pelihahmon tilatiedot JSON tiedostoksi
+    public void Save()
+    {
+        Debug.Log("Testi: JSON-tallenus käynnissä");
+
+        // Luodaan playerData olio
+        PlayerData playerData = new PlayerData(this);
+
+        // Muodostetaan tilatiedosta JSON
+        string json = JsonUtility.ToJson(playerData);
+
+        // Tallenetaan JSON playerData.json nimiseen tiedostoon
+        File.WriteAllText($"{Application.dataPath}/playerData.json", json);
     }
 }
 
