@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /// <summary>
-/// Luokka on vuorovaikutuksessa painikkeen kanssa.
+/// Luokka on vuorovaikutuksessa paini  kkeen kanssa.
 /// </summary>
 public class ButtonController : MonoBehaviour
 {
@@ -10,8 +12,10 @@ public class ButtonController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Keyboard.current.eKey.wasPressedThisFrame)
         {
+            Debug.Log("E was pressed");
+
             OpenChest();
         }
     }
@@ -24,6 +28,8 @@ public class ButtonController : MonoBehaviour
         if (chest != null)
         {
             chest.OpenChest();
+
+            Debug.Log("Arkku on Auki");
         }
         else
         {
