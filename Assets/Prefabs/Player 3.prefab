@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 144026992817942615}
   - component: {fileID: 5775994110515039804}
   - component: {fileID: 72664170806564434}
-  - component: {fileID: 2544980016552073625}
   - component: {fileID: 3237859397467184254}
   m_Layer: 0
   m_Name: Player 3
@@ -143,20 +142,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2544980016552073625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1577348876140241937}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b149b0b300c9094f899b872fb0af463, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController_ver2
-  moveSpeed: 4
-  jumpForce: 5
 --- !u!114 &3237859397467184254
 MonoBehaviour:
   m_ObjectHideFlags: 0

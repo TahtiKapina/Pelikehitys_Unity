@@ -27,7 +27,7 @@ public class ButtonController : MonoBehaviour
     {
         if (chest != null)
         {
-            chest.OpenChest();
+            chest.Open();
 
             Debug.Log("Arkku on Auki");
         }
